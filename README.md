@@ -40,21 +40,21 @@ Other platforms will be similar.
     in your build directory
 
 Note that you need to use a CMake version greater or equal to 3.23.1 and you
-need a C++ compiler (e.g., g++) that supports c++17.
+need a C++ compiler (e.g., g++) that supports c++20.
 
 * On a CPU-only TOSS4 system:
 ```
 module load cmake/3.23.1
 module load gcc/10.3.1
-cmake -DCMAKE_CXX_COMPILER=g++ -DBLT_CXX_STD=c++17 -DENABLE_CUDA=Off -DENABLE_OPENMP=On -DRAJA_ENABLE_EXERCISES=Off -DCMAKE_BUILD_TYPE=Release .. 
+cmake -DCMAKE_CXX_COMPILER=g++ -DBLT_CXX_STD=c++20 -DENABLE_CUDA=Off -DENABLE_OPENMP=On -DRAJA_ENABLE_EXERCISES=Off -DCMAKE_BUILD_TYPE=Release .. 
 ```
 
-* On a GPU-enabled system, such as blueos:
+* On a GPU-enabled system:
 ```
-module load cmake/3.23.1
-module load gcc/8.3.1
-module load cuda/11.2.0
-cmake -DBLT_CXX_STD=c++17 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=70 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-11.2.0/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-11.2.0 -DCMAKE_CUDA_FLAGS=--extended-lambda -DRAJA_ENABLE_EXERCISES=Off -DCMAKE_BUILD_TYPE=Release ..
+module load cmake/3.30.5
+module load gcc/10.3.1
+module load cuda/13.1.1
+cmake -DBLT_CXX_STD=c++20 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=90 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-13.1.1/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-13.1.1 -DCMAKE_CUDA_FLAGS="--extended-lambda --expt-relaxed-constexpr" -DCMAKE_BUILD_TYPE=Release ..
 ```
 
 License
