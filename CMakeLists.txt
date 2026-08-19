@@ -10,7 +10,7 @@ set (RAJA_ENABLE_EXERCISES Off CACHE BOOL "")
 set (ENABLE_DOCUMENTATION Off CACHE BOOL "")
 set (ENABLE_BENCHMARKS Off CACHE BOOL "")
 
-set(BLT_CXX_STD "c++14")
+set(BLT_CXX_STD "c++20")
 include(blt/SetupBLT.cmake)
 
 if (ENABLE_CUDA)
