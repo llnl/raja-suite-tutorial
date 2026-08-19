@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23.1)
+cmake_minimum_required(VERSION 3.30.5)
 
 project(RajaSuiteTutorial LANGUAGES C CXX)
 
@@ -11,17 +11,16 @@ set (ENABLE_DOCUMENTATION Off CACHE BOOL "")
 set (ENABLE_BENCHMARKS Off CACHE BOOL "")
 
 set(BLT_CXX_STD "c++20")
-include(blt/SetupBLT.cmake)
 
 if (ENABLE_CUDA)
-  if (DEFINED CMAKE_CUDA_ARCHITECTURES)
-    if ("${CMAKE_CUDA_ARCHITECTURES}" STREQUAL "70")
-      message(STATUS "CUDA compute architecture set to 70")
-    else ()
-      set(CMAKE_CUDA_ARCHITECTURES "70" CACHE STRING "Set CMAKE_CUDA_ARCHITECTURES to RAJA minimum supported" FORCE)
-    endif ()
+  if (NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+    set(CMAKE_CUDA_ARCHITECTURES "90" CACHE STRING "Set CMAKE_CUDA_ARCHITECTURES to default 90")
+  else()
+    message(STATUS "CUDA compute architecture user-defined to ${CMAKE_CUDA_ARCHITECTURES}")
   endif()
 endif()
+
+include(blt/SetupBLT.cmake)
 
 add_subdirectory(tpl)
 add_subdirectory(Intro_Tutorial)
