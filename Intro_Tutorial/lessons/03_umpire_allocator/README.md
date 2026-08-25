@@ -29,13 +29,13 @@ with the desired size for your allocation:
 void* memory = allocator.allocate(size in bytes);
 ```
 
-Moving and modifying data in a heterogenous memory system can be subtle
+Moving and modifying data in a heterogeneous memory system can be subtle
 because you have to keep track of the source and destination memory spaces,
 and often use vendor-specific APIs to perform the modifications. In Umpire,
 all data modification and movement, regardless of memory resource or platform,
 is done using **Umpire Operations**.
 
-Next, we will use the `memset` Operator provided by Umpire's Resource Manager
+Next, we will use the `memset` operator provided by Umpire's Resource Manager
 to set the memory we just allocated to zero.
 
 Don't forget to deallocate your memory afterwards!

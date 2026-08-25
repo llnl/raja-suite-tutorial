@@ -37,7 +37,7 @@ for (int i = 0; i < N; ++i) {
 ```
 
 This kernel implementation does not have a race condition. However, the results
-could still be non-deterministic due to order in which the values are
+could still be non-deterministic due to the order in which the values are
 accumulated in the sum in parallel.
 
 It is important to note that not all parallel programming models provide a
@@ -50,7 +50,7 @@ other reduction operations that RAJA supports, can be found in the
 [RAJA Reduction Operations](https://raja.readthedocs.io/en/develop/sphinx/user_guide/feature/reduction.html).
 
 In this lesson, we will use a `RAJA::ReduceSum` object to approximate $\pi$,
-the ratio of the area in a circle over its diameter, using a Riemann integral
+the ratio of the circle's circumference to its diameter, using a Riemann integral
 approximation of the formula
 ```math
 \frac{ \pi }{4} = \tan^{-1}(1) = \int_0^1 \frac{1}{1+x^2}\,dx \approx \sum_{i=0}^{N} \frac{1}{1 + ( (i+0.5) \Delta x )^{2}} \Delta x
@@ -81,7 +81,7 @@ familiar `3.145...` as expected.
 
 After that, you will find a `TODO` asking you to implement an OpenMP version of
 the kernel. You will use `RAJA::omp_parallel_for_exec` for the execution policy
-to specialize the `RAJA::forall` template and `RAJA::omp_reduce` for the reduce
+to specialize the `RAJA::forall` template and `RAJA::omp_reduce` for the reduction
 policy to specialize the `RAJA::ReduceSum` object.
 
 Once you have filled in the correct reduction statement, compile and run:

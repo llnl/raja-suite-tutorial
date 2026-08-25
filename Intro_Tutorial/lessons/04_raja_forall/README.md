@@ -22,7 +22,7 @@ for (int i = 0; i < N; ++i) {
 
 Each loop iterate sets the array element at the iterate index to the index
 value. Clearly, each iterate is independent of the others. If this OpenMP
-kernel were run with M thread, then depending on how the loop work is
+kernel were run with M threads, then depending on how the loop work is
 scheduled, iterates may be partitioned into chunks of size N/M with each 
 thread executing one chunk of iterates. This is illustrated in the figure.
 
@@ -89,7 +89,7 @@ $ ./bin/04_raja_forall
 ```
 
 If you need help, you can compare your version of the code to the solution
-code using the command `diff 04_raja_forall.cpp solution/04_raja_forall_solution.cpp`.
+code using the command `diff 04_raja_forall.cpp 04_raja_forall_solution.cpp`.
 
 Are the array elements that are printed out the same in each case? How do the 
 execution times compare? Which kernel ran faster?
