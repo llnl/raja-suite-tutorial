@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25.2)
+cmake_minimum_required(VERSION 3.23.1)
 
 project(RajaSuiteTutorial LANGUAGES C CXX)
 
