@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23.1)
+cmake_minimum_required(VERSION 3.25.2)
 
 project(RajaSuiteTutorial LANGUAGES C CXX)
 
@@ -14,7 +14,7 @@ set(BLT_CXX_STD "c++20")
 
 if (ENABLE_CUDA)
   if (NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
-    set(CMAKE_CUDA_ARCHITECTURES "90" CACHE STRING "Set CMAKE_CUDA_ARCHITECTURES to default 90")
+    set(CMAKE_CUDA_ARCHITECTURES "89" CACHE STRING "Set CMAKE_CUDA_ARCHITECTURES to default 89")
   else()
     message(STATUS "CUDA compute architecture user-defined to ${CMAKE_CUDA_ARCHITECTURES}")
   endif()

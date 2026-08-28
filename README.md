@@ -39,22 +39,22 @@ Other platforms will be similar.
   * Tutorial lesson executable files will be located in the *bin* sub-directory
     in your build directory
 
-Note that you need to use a CMake version greater or equal to 3.23.1 and you
+Note that you need to use a CMake version greater or equal to 3.25.2 and you
 need a C++ compiler (e.g., g++) that supports c++20.
 
 * On a CPU-only TOSS4 system:
 ```
-module load cmake/3.23.1
+module load cmake/3.25.2
 module load gcc/10.3.1
 cmake -DCMAKE_CXX_COMPILER=g++ -DBLT_CXX_STD=c++20 -DENABLE_CUDA=Off -DENABLE_OPENMP=On -DRAJA_ENABLE_EXERCISES=Off -DCMAKE_BUILD_TYPE=Release .. 
 ```
 
 * On a GPU-enabled system:
 ```
-module load cmake/3.30.5
+module load cmake/3.25.2
 module load gcc/10.3.1
 module load cuda/13.1.1
-cmake -DBLT_CXX_STD=c++20 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=90 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-13.1.1/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-13.1.1 -DCMAKE_CUDA_FLAGS="--extended-lambda --expt-relaxed-constexpr" -DCMAKE_BUILD_TYPE=Release ..
+cmake -DBLT_CXX_STD=c++20 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=89 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-13.1.1/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-13.1.1 -DCMAKE_CUDA_FLAGS="--extended-lambda --expt-relaxed-constexpr" -DCMAKE_BUILD_TYPE=Release ..
 ```
 
 License
