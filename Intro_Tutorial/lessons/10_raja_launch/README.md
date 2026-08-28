@@ -25,9 +25,9 @@ policies shown here for the x-dimension (similar policies exist for the y- and z
     RAJA::LaunchParams(RAJA::Teams(teams), RAJA::Threads(team_size)),
       [=] RAJA_HOST_DEVICE(RAJA::LaunchContext ctx) {
 
-        // ``RAJA::Loops`` may be nested within an kernel execution space
+        // ``RAJA::loop`` may be nested within an kernel execution space
         RAJA::loop<LOOP_POL>(ctx, RAJA::TypedRangeSegment<int>(0,M), [&] (int row) {
-          RAJA::loop<LOOP_POL>(ctx, RAJA::TypedRangeSegment<int>(0,M), [&] (int row) {
+          RAJA::loop<LOOP_POL>(ctx, RAJA::TypedRangeSegment<int>(0,N), [&] (int col) {
               // Computation
           });
         });
@@ -35,4 +35,4 @@ policies shown here for the x-dimension (similar policies exist for the y- and z
     });
 ```
 
-In this final lesson we invite the particpants to complete the policy selection for a matrix-transpose example.
+In this final lesson, we invite the particpants to complete the policy selection for a matrix-transpose example.

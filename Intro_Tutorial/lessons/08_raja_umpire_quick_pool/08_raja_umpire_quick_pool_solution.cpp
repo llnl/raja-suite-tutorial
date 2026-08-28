@@ -7,7 +7,7 @@
 #include "umpire/strategy/QuickPool.hpp"
 
 //Uncomment to compile
-//#define COMPILE
+#define COMPILE
 
 int main()
 {

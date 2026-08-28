@@ -4,7 +4,7 @@ In this lesson, you will learn how to add RAJA and Umpire as dependencies
 to your application.
 
 RAJA and Umpire are included in this project as **targets** that we tell CMake
-our application depends on: [RAJA and Umpire Depend](https://github.com/LLNL/raja-suite-tutorial/blob/main/tpl/CMakeLists.txt).
+our application depends on: [RAJA and Umpire Dependencies](https://github.com/LLNL/raja-suite-tutorial/blob/main/tpl/CMakeLists.txt).
 
 Additionally, we can specify other dependency targets, such as CUDA, in the
 `blt_add_executable` macro for our application executable. The macro has
@@ -12,8 +12,8 @@ an argument for this, `DEPENDS_ON`, that you can use to list dependencies.
 
 ```
 blt_add_executable(
-    NAME 01_blt_cmake
-    SOURCES 01_blt_cmake.cpp
+    NAME 02_raja_umpire
+    SOURCES 02_raja_umpire.cpp
     DEPENDS_ON )
 ```
 

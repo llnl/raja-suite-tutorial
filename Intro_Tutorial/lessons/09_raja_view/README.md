@@ -22,7 +22,7 @@ a data pointer and three extents, one for each View dimension. And so on for
 higher dimensions.
 
 The `RAJA::Layout<DIM, TYPE>` takes two template parameters. The `DIM` parameter
-is the number of indexing dimension, and the `TYPE` parameter is the data type
+is the number of indexing dimensions, and the `TYPE` parameter is the data type
 of the indices used to index into the underlying data. For example, a
 two-dimensional layout for a view that takes `int` values to index into the
 data is defined as:

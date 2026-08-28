@@ -34,14 +34,14 @@ the `ResourceManager`:
 This newly created `pool` is an `umpire::Allocator` that uses the `QuickPool`
 allocation strategy. In the code example above, we call the
 `ResourceManager::makeAllocator` function to create the pool allocator. We
-pass in: (1) the name we choose for the the pool, and (2) an allocator we
+pass in: (1) the name we choose for the pool, and (2) an allocator we
 previously created with the `ResourceManager`. Note that you will need to
 include the Umpire header file for the pool type you wish to use, in this case
 ```
 #include "umpire/strategy/QuickPool.hpp"
 ```
 
-When you have created your QuickPool allocator, uncomment the COMPILE define on line 7;
+When you have created your QuickPool allocator, uncomment the COMPILE definition on line 7;
 then compile and run the code:
 ```
 $ make 08_raja_umpire_quick_pool

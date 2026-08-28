@@ -84,7 +84,7 @@ run the code:
 
 ```
 $ make 07_raja_atomic
-$ .bin/07_raja_atomic
+$ ./bin/07_raja_atomic
 ```
 
 Additional information about RAJA atomic operation support can be found in
@@ -108,7 +108,7 @@ partial sums of the input array. To illustrate, consider the following code,
 which appears in the file `07_raja_scan.cpp`.
 
 ```
-constexpr N = 10;
+constexpr int N = 10;
 
 int in[N] = {8,-1,2,9,10,3,4,1,6,7};
 int is_out[N] = {};
@@ -143,10 +143,10 @@ The code shows a `RAJA::inclusive_scan` and a `RAJA::exclusive_scan`. Each
 scan method is specialized on an execution policy. RAJA scan methods use the
 same execution policies as `RAJA::forall` methods. Second, the arguments to
 the scan methods are RAJA *span* objects that are made using the 
-`RAJA::make_span` helper method that. The helper method takes the address of
+`RAJA::make_span` helper method. The helper method takes the address of
 an array element and the number of elements in the span, `N` in this example.
 
-Note that output of the scan operations is similar, but not the same.
+Note that the output of the scan operations is similar, but not the same.
 
 The *inclusive scan* fills the output array with partial sums of the input
 array. Here, the first element of the input array is 8, so the first element
@@ -176,7 +176,7 @@ example code above:
 RAJA::inclusive_scan_inplace<EXEC_POL>( RAJA::make_span(in, N) );
 
 std::cout << "Output (inclusive in-place): ";
-for (int i = 0; i < N; ++i) }
+for (int i = 0; i < N; ++i) {
   std::cout << in[i] << "  ";
 }
 std::cout << std::endl;
@@ -185,7 +185,7 @@ std::cout << std::endl;
 This code produces the following output, which is the same as the result in the
 output array in the `RAJA::inclusive_scan` above:
 ```
-Output (inclusive-inplace): 8  7  9  18  28  31  35  36  42  49
+Output (inclusive in-place): 8  7  9  18  28  31  35  36  42  49
 ```
 
 RAJA provides operators that can be used with all scan methods, such as
@@ -202,7 +202,7 @@ type to run on a CUDA GPU device. To compile and run the code:
 
 ```
 $ make 07_raja_scan
-$ .bin/07_raja_scan
+$ ./bin/07_raja_scan
 ```
 
 Is the result what you expected it to be? Can you explain why the first value
