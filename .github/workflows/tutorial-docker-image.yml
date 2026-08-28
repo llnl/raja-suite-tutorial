@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: llnl/raja-suite-tutorial/tutorial
+  CUDA_ARCHITECTURES: "89"
 
 permissions:
   contents: read
@@ -34,8 +35,14 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: build docker image
-      run: docker build --build-arg njobs=2 --file containers/tutorial/Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest .
+    - name: Build Docker image
+      run: |
+        docker build --pull \
+          --build-arg CUDA_ARCHITECTURES="${{ env.CUDA_ARCHITECTURES }}" \
+          --build-arg njobs=2 \
+          --file containers/tutorial/Dockerfile \
+          --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+          .
 
     - name: push docker image
       if: github.event_name != 'pull_request'
