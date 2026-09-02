@@ -9,7 +9,7 @@ FROM ghcr.io/llnl/radiuss:cuda-13-0-ubuntu-24.04
 
 ARG USER=rajadev
 ARG CUDA_HOME=/usr/local/cuda-13.0
-ARG CUDA_ARCHITECTURES=89
+ARG CUDA_ARCHITECTURES=75
 ARG njobs=2
 ENV HOME /home/${USER}
 
