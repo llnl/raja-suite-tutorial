@@ -54,7 +54,7 @@ cmake -DCMAKE_CXX_COMPILER=g++ -DBLT_CXX_STD=c++20 -DENABLE_CUDA=Off -DENABLE_OP
 module load cmake/3.25.2
 module load gcc/10.3.1
 module load cuda/13.1.1
-cmake -DBLT_CXX_STD=c++20 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=89 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-13.1.1/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-13.1.1 -DCMAKE_CUDA_FLAGS="--extended-lambda --expt-relaxed-constexpr" -DCMAKE_BUILD_TYPE=Release ..
+cmake -DBLT_CXX_STD=c++20 -DENABLE_CUDA=On -DENABLE_OPENMP=On -DCMAKE_CUDA_ARCHITECTURES=75 -DCMAKE_CUDA_COMPILER=/usr/tce/packages/cuda/cuda-13.1.1/bin/nvcc -DCUDA_TOOLKIT_ROOT_DIR=/usr/tce/packages/cuda/cuda-13.1.1 -DCMAKE_CUDA_FLAGS="--extended-lambda --expt-relaxed-constexpr" -DCMAKE_BUILD_TYPE=Release ..
 ```
 
 License
