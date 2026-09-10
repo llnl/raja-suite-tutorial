@@ -20,6 +20,8 @@
 
 // Basic Caliper profiling:
 //   CALI_CONFIG=runtime-report ./bin/profile_raja 1024
+// For viewing on-device GPU clock time (omits noise from memory transfers, etc), look at
+//   CALI_CONFIG=cuda-activity-report,show_kernels ./bin/profile_raja 1024
 //
 // H100 recommendation:
 //   GLOBAL 32x8 is the preferred starting policy for this naive
