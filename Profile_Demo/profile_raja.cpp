@@ -277,6 +277,10 @@ void matrix_multiply_variant(const double *A, const double *B, double *C, int m,
       });
 }
 
+// Compute grid: m blocks, p threads per blocks.  Limited by number
+// of blocks
+// Rows: if (int i = blockIdx.x; i < m)
+// Cols: if (int j = threadIdx.x; j < p)
 template <typename LaunchPolicy>
 void matrix_multiply_direct(const double *A, const double *B, double *C, int m,
                             int n, int p, const char *name) {
@@ -297,6 +301,14 @@ void matrix_multiply_direct(const double *A, const double *B, double *C, int m,
                                                               name, params);
 }
 
+// Compute grid: can be anything not limited by problem size
+// If there aren't enough blocks for rows, the ith block
+// computes the  i + num_blocks, i + num_blocks * 2...
+// output rows as well.
+// Rows: if (int i = blockIdx.x; i < m; i += gridDim.x)
+// Cols: if (int j = threadIdx.x; j < p; j += blockDim.x)
+// Assign each block a row in the output, each thread a
+// col, but stride this by the grid dim
 template <typename LaunchPolicy>
 void matrix_multiply_loop(const double *A, const double *B, double *C, int m,
                           int n, int p, const char *name) {
@@ -312,6 +324,11 @@ void matrix_multiply_loop(const double *A, const double *B, double *C, int m,
                                                               name, params);
 }
 
+// Each thread is directly mapped onto an element in the output array.
+// The CUDA runtime decides how to handle cases where m and p are very large.
+// Rows: int i = threadIdx.y + blockIdx.y * blockDim.y
+// Cols: int j = threadIdx.x + blockIdx.x * blockDim.x
+// each block is a row in the output, each thread a col
 template <typename LaunchPolicy>
 void matrix_multiply_global_16x16(const double *A, const double *B, double *C,
                                   int m, int n, int p, const char *name) {
