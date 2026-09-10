@@ -281,8 +281,6 @@ void matrix_multiply_variant(const double *A, const double *B, double *C, int m,
 
 // Compute grid: m blocks, p threads per blocks.  Limited by number
 // of blocks
-// Rows: if (int i = blockIdx.x; i < m)
-// Cols: if (int j = threadIdx.x; j < p)
 template <typename LaunchPolicy>
 void matrix_multiply_direct(const double *A, const double *B, double *C, int m,
                             int n, int p, const char *name) {
@@ -293,8 +291,10 @@ void matrix_multiply_direct(const double *A, const double *B, double *C, int m,
     throw std::runtime_error("DIRECT requires p <= 1024");
   }
 
+  // Rows: if (int i = blockIdx.x; i < m)
   using loop1_pol = RAJA::LoopPolicy<device::block_x_direct>;
 
+  // Cols: if (int j = threadIdx.x; j < p)
   using loop0_pol = RAJA::LoopPolicy<device::thread_x_direct>;
 
   RAJA::LaunchParams params{RAJA::Teams(m), RAJA::Threads(p)};
@@ -304,20 +304,20 @@ void matrix_multiply_direct(const double *A, const double *B, double *C, int m,
 }
 
 // Compute grid: can be anything not limited by problem size
+// Assign each block a row in the output, each thread a
+// col, but stride this by the grid dim
 // If there aren't enough blocks for rows, the ith block
 // computes the  i + num_blocks, i + num_blocks * 2...
 // output rows as well.
-// Rows: if (int i = blockIdx.x; i < m; i += gridDim.x)
-// Cols: if (int j = threadIdx.x; j < p; j += blockDim.x)
-// Assign each block a row in the output, each thread a
-// col, but stride this by the grid dim
 template <typename LaunchPolicy>
 void matrix_multiply_loop(const double *A, const double *B, double *C, int m,
                           int n, int p, const char *name) {
   // LOOP is a general baseline using 256 threads per block.
 
+  // Rows: if (int i = blockIdx.x; i < m; i += gridDim.x)
   using loop1_pol = RAJA::LoopPolicy<device::block_x_loop>;
 
+  // Cols: if (int j = threadIdx.x; j < p; j += blockDim.x)
   using loop0_pol = RAJA::LoopPolicy<device::thread_x_loop>;
 
   RAJA::LaunchParams params{RAJA::Teams(m), RAJA::Threads(256)};
@@ -328,9 +328,6 @@ void matrix_multiply_loop(const double *A, const double *B, double *C, int m,
 
 // Each thread is directly mapped onto an element in the output array.
 // The CUDA runtime decides how to handle cases where m and p are very large.
-// Rows: int i = threadIdx.y + blockIdx.y * blockDim.y
-// Cols: int j = threadIdx.x + blockIdx.x * blockDim.x
-// each block is a row in the output, each thread a col
 template <typename LaunchPolicy>
 void matrix_multiply_global_16x16(const double *A, const double *B, double *C,
                                   int m, int n, int p, const char *name) {
@@ -340,8 +337,10 @@ void matrix_multiply_global_16x16(const double *A, const double *B, double *C,
   constexpr int block_x = 16;
   constexpr int block_y = 16;
 
+  // Rows: int i = threadIdx.y + blockIdx.y * blockDim.y
   using loop1_pol = RAJA::LoopPolicy<device::global_size_y_direct<block_y>>;
 
+  // Cols: int j = threadIdx.x + blockIdx.x * blockDim.x
   using loop0_pol = RAJA::LoopPolicy<device::global_size_x_direct<block_x>>;
 
   const int teams_x = (p + block_x - 1) / block_x;
@@ -367,8 +366,10 @@ void matrix_multiply_global_32x8(const double *A, const double *B, double *C,
   constexpr int block_x = 32;
   constexpr int block_y = 8;
 
+  // Rows: int i = threadIdx.y + blockIdx.y * blockDim.y
   using loop1_pol = RAJA::LoopPolicy<device::global_size_y_direct<block_y>>;
 
+  // Cols: int j = threadIdx.x + blockIdx.x * blockDim.x
   using loop0_pol = RAJA::LoopPolicy<device::global_size_x_direct<block_x>>;
 
   const int teams_x = (p + block_x - 1) / block_x;
@@ -392,8 +393,10 @@ void matrix_multiply_global_32x16(const double *A, const double *B, double *C,
   constexpr int block_x = 32;
   constexpr int block_y = 16;
 
+  // Rows: int i = threadIdx.y + blockIdx.y * blockDim.y
   using loop1_pol = RAJA::LoopPolicy<device::global_size_y_direct<block_y>>;
 
+  // Cols: int j = threadIdx.x + blockIdx.x * blockDim.x
   using loop0_pol = RAJA::LoopPolicy<device::global_size_x_direct<block_x>>;
 
   const int teams_x = (p + block_x - 1) / block_x;
