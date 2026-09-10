@@ -1,6 +1,6 @@
-if (ENABLE_CUDA) 
+if (ENABLE_CUDA)
   if (RAJA_ENABLE_CALIPER)
-    blt_add_executable(
+    tutorial_add_executable(
       NAME profile_raja
       SOURCES profile_raja.cpp
       DEPENDS_ON RAJA umpire cuda)
