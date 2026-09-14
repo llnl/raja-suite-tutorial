@@ -13,7 +13,7 @@ ARG CUDA_ARCHITECTURES=75
 ARG njobs=2
 ENV HOME /home/${USER}
 
-RUN sudo apt-get update && sudo apt-get install -y supervisor
+RUN sudo apt-get update && sudo apt-get install -y supervisor python3-matplotlib
 RUN sudo useradd --create-home --shell /bin/bash ${USER}
 
 WORKDIR /opt/archives
